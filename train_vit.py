@@ -48,6 +48,22 @@ for epoch in track(range(epochs),description='Training'):
         epoch_loss /= len(train_loader)
         print(f"Loss:{epoch_loss}")
 
+###### Evaluation #########
+
+def evaluate_model(model,loader):
+    model.eval()
+    correct, total = 0, 0
+    with torch.no_grad():
+        for inputs, targets in loader:
+            logits = model(inputs)
+            logits = logits.mean(dim=1)  # If using patch embeddings
+            predictions = torch.argmax(logits, dim=1)
+            correct += (predictions == targets).sum().item()
+            total += targets.size(0)
+    return 100 * correct / total
+
+pretty.pprint(f"Test accuracy:{evaluate_model(model,test_loader)}")
+
 ######## Save Model dict #######
 
 torch.save(model.state_dict(),'./checkpoints/vit.pt')
