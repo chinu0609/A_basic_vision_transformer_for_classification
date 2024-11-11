@@ -6,6 +6,8 @@ from torch.utils.data import DataLoader
 from rich.progress import track
 import torch.nn as nn
 from rich import pretty
+import os 
+
 ########Transforms#######
 
 transforms = tr.Compose([tr.ToTensor(),tr.Lambda(lambda x:torch.cat([x,x,x],0))])
@@ -65,7 +67,7 @@ def evaluate_model(model,loader):
 pretty.pprint(f"Test accuracy:{evaluate_model(model,test_loader)}")
 
 ######## Save Model dict #######
-
+os.mkdir("./checkpoints")
 torch.save(model.state_dict(),'./checkpoints/vit.pt')
 
 pretty.pprint(f'model saved in the checkpoints directory')
