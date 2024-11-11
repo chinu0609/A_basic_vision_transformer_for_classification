@@ -24,7 +24,7 @@ class Patch_Gen(nn.Module):
       
 
 
-class Main_Model(nn.Module):
+class Attention_Part(nn.Module):
     def __init__(self,num_heads:int=8,embed_dim:int=64,patch_size:int=8):
         super().__init__()
         self.patch_embed = Patch_Gen(embed_dim=embed_dim,patch_size=patch_size)
@@ -38,7 +38,7 @@ class Main_Model(nn.Module):
 class MLP_Attention(nn.Module):
     def __init__(self,n_embed:int,num_classes:int,patch_size:int=8):
         super().__init__()
-        self.main = Main_Model(patch_size=patch_size,embed_dim=n_embed)
+        self.main = Attention_Part(patch_size=patch_size,embed_dim=n_embed)
         self.layering = nn.Sequential(
             nn.Linear(n_embed,100),
             nn.ReLU(),
