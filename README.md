@@ -19,9 +19,9 @@ The model demonstrates the core principles of the Vision Transformer (ViT) archi
 ## **Model Architecture**
 
 ### **1. Patch Embedding**
-- Input image: \(28 \times 28\) (MNIST)
+- Input image: (28X28) (MNIST)
 - Divided into non-overlapping patches using `Conv2d`:
-  - **Patch Size**: Configurable (default: \(14\times 14\)).
+  - **Patch Size**: Configurable (default: (14X14)).
   - **Input Channels**: 3 (for RGB images, though MNIST is grayscale; adapted for compatibility).
   - **Output Channels**: 64 (embedding dimension).
 
